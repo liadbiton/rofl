@@ -15,6 +15,16 @@ import 'package:rxdart/rxdart.dart';
 final _messageStreamController = BehaviorSubject<RemoteMessage>();
 
 // TODO: Define the background message handler
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+    print('Message data: ${message.data}');
+    print('Message notification: ${message.notification?.title}');
+    print('Message notification: ${message.notification?.body}');
+  }
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +66,10 @@ Future<void> main() async {
     _messageStreamController.sink.add(message);
   });
   
-  // TODO: Set up background message handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  
+  // TODO: Remove and add await
+  messaging.subscribeToTopic("topics-all");
 
   runApp(const MyApp());
 }
