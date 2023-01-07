@@ -71,8 +71,7 @@ function to query the db this is not working the website with an example is
 https://stackoverflow.com/questions/52340411/golang-sql-query-variable-substituion
 */
 func queryDB(db *sql.DB, table string, columns []string, condition string) {
-	query := fmt.Sprintf("'SELECT \"%s\", \"%s\" FROM \"%s\"'", columns[1], columns[2], table)
-	fmt.Print(query)
+	query := fmt.Sprintf("SELECT \"%s\", \"%s\" FROM \"%s\"", columns[1], columns[2], table)
 	rows, err := db.Query(query)
 	CheckError(err)
 
