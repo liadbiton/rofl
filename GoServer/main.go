@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net"
 	"os"
-	//"strconv"
 
 	_ "github.com/lib/pq"
 )
@@ -15,26 +14,14 @@ const (
 	SERVERTYPE = "tcp"
 )
 
-type Client struct {
-	clientConn net.Conn
-	clientPort int
-	clientIP   string
-}
-
-type Pool struct {
-}
-
 func main() {
-	//fmt.Println("hi")
-	//run the listening serevr
 	runServer()
-	//fmt.Println("hi2")
 }
 
 /*
 this function run the server that take cares of
 the connecting clients, every new client, the server
-creates a new thred for the client server connction
+creates a new goroutine for the client server connection
 */
 
 func runServer() {
@@ -59,36 +46,39 @@ func runServer() {
 }
 
 /*
-this function holds widin the connection between
+this function holds within the connection between
 the client and the server and answer every massage
 from the client.
 */
 func clientConnected(connection net.Conn) {
-	if addr, ok := connection.RemoteAddr().(*net.TCPAddr); ok {
-		fmt.Println(addr.IP.String())
-		fmt.Println((addr.Port))
-		//client := Client{clientConn: connection, clientIP: addr.IP.String(), clientPort: addr.Port}
-		//connection.
-		//connection.SetDeadline()
-		buffer := make(chan []byte, 1024)
-		//c := make(chan int, 10)
-		for {
-			mLen, err := connection.Read(<-buffer)
-			if err != nil {
-				fmt.Println("Error reading:", err.Error())
-				connection.Close()
-				return
-			}
-			_, err = connection.Write([]byte("Thanks! Got your message:" + string(buffer[:mLen])))
+	buffer := make([]byte, 1024)
+	channel := make(chan []byte)
+	go massageManager(channel)
+	for {
+		mLen, err := connection.Read(buffer)
+		if err != nil {
+			fmt.Println("Error reading:", err.Error())
+			connection.Close()
+			return
 		}
+		channel <- buffer[:mLen]
 	}
 }
 
-func poolManage() {
+func massageManager(channel chan []byte) {
 	for {
-		select {
-		case massage:= <-
+		massage := <-channel
+		flag := 0
+		firstIDX := 0
+		for i := 0; i < len(massage); i++ {
+			char := string(massage[i])
+			if char == "a" {
+				flag = 1
+				firstIDX = i
+			}
+			if char == "b" && flag == 1 {
+				fmt.Println(string(massage[firstIDX : i+1]))
+			}
 		}
-
 	}
 }
