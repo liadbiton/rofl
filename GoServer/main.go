@@ -12,7 +12,38 @@ const (
 	SERVERHOST = "127.0.0.1"
 	SERVERPORT = "9988"
 	SERVERTYPE = "tcp"
+
+	LOGIN     = "0001"
+	SIGNUPOLD = "0002"
+	SIGNUPVOL = "0003"
+	LOCATION  = "0005"
+	CALLVOL   = "0010"
 )
+
+type massage struct {
+	massageSocket  net.Conn
+	massageOPCode  string
+	massageContent string
+}
+
+/*
+this func define new massage
+the func wait for a massage from the client
+then sets up the massage base on the OPCode
+*/
+func newMassage(connection net.Conn) *massage {
+	mas := massage{massageSocket: connection}
+	buffer := make([]byte, 1024)
+	mLen, err := connection.Read(buffer)
+	if err != nil {
+		fmt.Println("Error reading:", err.Error())
+		connection.Close()
+		return nil
+	}
+	mas.massageContent = string(buffer[:mLen])
+	mas.massageOPCode = string(buffer[:4])
+	return &mas
+}
 
 func main() {
 	runServer()
@@ -21,7 +52,7 @@ func main() {
 /*
 this function run the server that take cares of
 the connecting clients, every new client, the server
-creates a new goroutine for the client server connection
+creates a new goroutine for the client server connection.
 */
 
 func runServer() {
@@ -51,34 +82,35 @@ the client and the server and answer every massage
 from the client.
 */
 func clientConnected(connection net.Conn) {
-	buffer := make([]byte, 1024)
-	channel := make(chan []byte)
-	go massageManager(channel)
 	for {
-		mLen, err := connection.Read(buffer)
-		if err != nil {
-			fmt.Println("Error reading:", err.Error())
-			connection.Close()
-			return
-		}
-		channel <- buffer[:mLen]
+		massage := newMassage(connection)
+		handleMassage(massage)
 	}
 }
 
-func massageManager(channel chan []byte) {
-	for {
-		massage := <-channel
-		flag := 0
-		firstIDX := 0
-		for i := 0; i < len(massage); i++ {
-			char := string(massage[i])
-			if char == "a" {
-				flag = 1
-				firstIDX = i
-			}
-			if char == "b" && flag == 1 {
-				fmt.Println(string(massage[firstIDX : i+1]))
-			}
-		}
+/*
+this func handle the massage content
+the func switch case depend on the
+OPCode it got from the user
+*/
+func handleMassage(mas *massage) {
+	switch mas.massageOPCode {
+	case LOGIN:
+		fmt.Println("wants to login")
+		//login(mas)
+	case SIGNUPOLD:
+		fmt.Println("wants to sign up as elder")
+		//signupOld(mas)
+	case SIGNUPVOL:
+		fmt.Println("wants to sign up as volunteer")
+		//signupVol(mas)
+	case LOCATION:
+		fmt.Println("wants to send location")
+	//getLocation(mas)
+	case CALLVOL:
+		fmt.Println("wants to call a vol")
+		//callVol(mas)
+	default:
+		fmt.Println("massage is not by protocol")
 	}
 }
