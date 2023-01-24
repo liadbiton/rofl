@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message AppRequest {
+    uint32 request_id = 1;
+}
