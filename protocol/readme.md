@@ -34,7 +34,7 @@ TODO
 ## 3. How To Use
 
 ### 3.1. Flutter
-- `protoc --dart_out=../lib/protocol protocol.proto`
+- `protoc --dart_out=../lib/protocol ./*.proto`
 
 ### 3.2. Go
 - TODO
@@ -49,6 +49,7 @@ A request from the client is according to the following format:
 - One of the possible requests
 
 ### 4.1. Volunteer Register
+- Is Volunteer - `bool`
 - First Name - `string`
 - Last Name - `string`
 - Password - `string`
@@ -57,13 +58,13 @@ A request from the client is according to the following format:
   - Latitude - `float`
   - Longitude - `float`
 - Phone Number - `string`
-- Email - `string`
 - ID Number - `string`
 - Birthday
   - Day - `uint`
   - Month - `uint`
   - Year - `uint`
 - FCM Token - `string`
+- Email - `string`
 
 ## 5. Server Responses
 A response from the server is according to the following format:
