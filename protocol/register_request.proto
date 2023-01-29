@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message HomeAddress {
+    string textual = 1;
+    float latitude = 2;
+    float longitude = 3;
+}
+
+message Date {
+    uint32 day = 1;
+    uint32 month = 2;
+    uint32 year = 3;
+}
+
+message VolunteerUniqueRegisterParameters {
+    string email = 1;
+}
+
+enum RegisterReturnCode {
+    REGISTER_SUCCESS = 0;
+    REGISTER_PHONE_TAKEN = 1;
+    REGISTER_EMAIL_TAKEN = 2;
+}
+
+message RegisterRequest {
+    bool is_volunteer = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string password = 4;
+    HomeAddress address = 5;
+    string phone_number = 6;
+    string id_number = 7;
+    Date birthday = 8;
+    optional string fcm_token = 9;
+    optional VolunteerUniqueRegisterParameters volunteer_parameters = 10;
+}
+
+message RegisterResponse {
+    RegisterReturnCode return_code = 1;
+    optional string session_token = 2;
+}
