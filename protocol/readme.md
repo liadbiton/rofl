@@ -42,10 +42,10 @@ TODO
 ## 4. Client Requests
 A request from the client is according to the following format:
 - App version - `uint`
-- Request ID - `uint`
 - Session Token - `string`
   - Received on login
   - Optional, isn't passed if the request is Register
+- Request ID - `uint`
 - One of the possible requests
 
 ### 4.1. Volunteer Register

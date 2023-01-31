@@ -4,10 +4,12 @@ import "register_request.proto";
 import "login_request.proto";
 
 message AppRequest {
-    uint32 request_id = 1;
+    uint32 version = 1;
+    uint32 session_token = 2;
+    uint32 request_id = 3;
     oneof request {
-        RegisterRequest register_request = 2;
-        LoginRequest logic_request = 3;
+        RegisterRequest register_request = 4;
+        LoginRequest logic_request = 5;
     }
 }
 
