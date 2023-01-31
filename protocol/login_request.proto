@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+enum LoginReturnCode {
+    LOGIN_SUCCESS = 0;
+    LOGIN_FAILED = 1;
+}
+
+message LoginRequest {
+    oneof user_identifier {
+        string phone_number = 1;
+        string email = 2;
+    }
+    string password = 3;
+}
+
+message LoginResponse {
+    LoginReturnCode return_code = 1;
+    optional string session_token = 2;
+}
