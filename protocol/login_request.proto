@@ -8,16 +8,15 @@ message LoginRequest {
     string password = 3;
 }
 
-enum LoginReturnCode {
-    LOGIN_SUCCESS = 0;
-    LOGIN_FAILED = 1;
-}
-
-message LoginResponseData {
-    string session_token = 1;
-}
-
 message LoginResponse {
-    LoginReturnCode return_code = 1;
-    optional LoginResponseData response_data = 2;
+    enum ReturnCode {
+        LOGIN_SUCCESS = 0;
+        LOGIN_FAILED = 1;
+    }
+    ReturnCode return_code = 1;
+
+    message ResponseData {
+        string session_token = 1;
+    }
+    optional ResponseData response_data = 2;
 }

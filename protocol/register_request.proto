@@ -1,20 +1,6 @@
 syntax = "proto3";
 
-message HomeAddress {
-    string textual = 1;
-    float latitude = 2;
-    float longitude = 3;
-}
-
-message Date {
-    uint32 day = 1;
-    uint32 month = 2;
-    uint32 year = 3;
-}
-
-message VolunteerUniqueRegisterParameters {
-    string email = 1;
-}
+import "user_information.proto";
 
 message RegisterRequest {
     bool is_volunteer = 1;
@@ -26,20 +12,22 @@ message RegisterRequest {
     string id_number = 7;
     Date birthday = 8;
     optional string fcm_token = 9;
-    optional VolunteerUniqueRegisterParameters volunteer_parameters = 10;
-}
-
-enum RegisterReturnCode {
-    REGISTER_SUCCESS = 0;
-    REGISTER_PHONE_TAKEN = 1;
-    REGISTER_EMAIL_TAKEN = 2;
-}
-
-message RegisterResponseData {
-    string session_token = 1;
+    message VolunteerParameters {
+        string email = 1;
+    }
+    optional VolunteerParameters volunteer_parameters = 10;
 }
 
 message RegisterResponse {
-    RegisterReturnCode return_code = 1;
-    optional RegisterResponseData response_data = 2;
+    enum ReturnCode {
+        REGISTER_SUCCESS = 0;
+        REGISTER_PHONE_TAKEN = 1;
+        REGISTER_EMAIL_TAKEN = 2;
+    }
+    ReturnCode return_code = 1;
+
+    message ResponseData {
+        string session_token = 1;
+    }
+    optional ResponseData response_data = 2;
 }
