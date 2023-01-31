@@ -16,12 +16,6 @@ message VolunteerUniqueRegisterParameters {
     string email = 1;
 }
 
-enum RegisterReturnCode {
-    REGISTER_SUCCESS = 0;
-    REGISTER_PHONE_TAKEN = 1;
-    REGISTER_EMAIL_TAKEN = 2;
-}
-
 message RegisterRequest {
     bool is_volunteer = 1;
     string first_name = 2;
@@ -35,7 +29,17 @@ message RegisterRequest {
     optional VolunteerUniqueRegisterParameters volunteer_parameters = 10;
 }
 
+enum RegisterReturnCode {
+    REGISTER_SUCCESS = 0;
+    REGISTER_PHONE_TAKEN = 1;
+    REGISTER_EMAIL_TAKEN = 2;
+}
+
+message RegisterResponseData {
+    string session_token = 1;
+}
+
 message RegisterResponse {
     RegisterReturnCode return_code = 1;
-    optional string session_token = 2;
+    optional RegisterResponseData response_data = 2;
 }
