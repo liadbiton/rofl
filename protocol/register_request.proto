@@ -20,9 +20,9 @@ message RegisterRequest {
 
 message RegisterResponse {
     enum ReturnCode {
-        REGISTER_SUCCESS = 0;
-        REGISTER_PHONE_TAKEN = 1;
-        REGISTER_EMAIL_TAKEN = 2;
+        SUCCESS = 0;
+        PHONE_TAKEN = 1;
+        EMAIL_TAKEN = 2;
     }
     ReturnCode return_code = 1;
 

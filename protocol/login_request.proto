@@ -10,8 +10,8 @@ message LoginRequest {
 
 message LoginResponse {
     enum ReturnCode {
-        LOGIN_SUCCESS = 0;
-        LOGIN_FAILED = 1;
+        SUCCESS = 0;
+        FAILED = 1;
     }
     ReturnCode return_code = 1;
 
