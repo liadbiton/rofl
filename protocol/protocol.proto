@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "register_request.proto";
+import "login_request.proto";
+
+message AppRequest {
+    uint32 version = 1;
+    optional uint32 session_token = 2;
+    uint32 request_id = 3;
+    oneof request {
+        RegisterRequest register_request = 4;
+        LoginRequest logic_request = 5;
+    }
+}
+
+message AppResponse{
+    uint32 request_id = 1;
+    oneof response {
+        RegisterResponse register_response = 2;
+        LoginResponse login_response = 3;
+    }
+}
