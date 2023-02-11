@@ -1,44 +1,34 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 
-	_ "github.com/lib/pq"
+	"firebase.google.com/go/v4/messaging"
 )
 
-const (
-	pgHost     = "127.0.0.1"
-	pgPort     = 5432
-	pgUser     = "postgres"
-	pgPassword = "admin"
-	pgDbName   = "dbBH"
-)
+const FIREBASE_SERVICE_ACCOUNT_KEY_PATH string = "C:\\Users\\magshimim\\Desktop\\work\\rofl_firebase_key\\rofl-684b1-firebase-adminsdk-cgqhk-17fe61be31.json"
+const CLIENT_TOKEN = "dHEnNOHAQKePyuvcZXJzax:APA91bEAsXzEySnZiyQUZhfjMMcOv8_8q8EOPt6p4n6m9W7ySzP2qUJpdEC1Q8x975TenutmOQsIWfIppfMWQuYteIzY6xWX8NrpZHo3R-Ed2htHotBK6nBUxV-020xbFejvLut2VqiS"
+const CLIENT_TOPIC = "topics-all"
 
 func main() {
-	// connection string
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", pgHost, pgPort, pgUser, pgPassword, pgDbName)
-
-	// open database
-	db, err := sql.Open("postgres", psqlconn)
-	CheckError(err)
-
-	// close database
-	defer db.Close()
-
-	// check db
-	err = db.Ping()
-	CheckError(err)
-
-	insertDynStmt := `insert into "olds"("FName", "LName") values($1, $2)`
-	_, e := db.Exec(insertDynStmt, "sol", "meyer")
-	CheckError(e)
-
-	fmt.Println("Connected!")
-}
-
-func CheckError(err error) {
-	if err != nil {
-		panic(err)
+	fmt.Println("HELLO")
+	firebase_app := initialize_fcm_service(FIREBASE_SERVICE_ACCOUNT_KEY_PATH)
+	response, err := sendNotificationToToken(firebase_app, CLIENT_TOKEN, messaging.Notification{Title: "I love dick"})
+	if nil != err {
+		fmt.Println("Damn we failed, the response is " + response)
+		fmt.Println("The error is " + err.Error())
+	} else {
+		fmt.Println("Successfully sent notification to token the response is " + response)
+		fmt.Printf("response: %v\n", response)
 	}
+
+	response, err = sendNotificationToTopic(firebase_app, CLIENT_TOPIC, messaging.Notification{Title: "I love cock"})
+	if nil != err {
+		fmt.Println("Damn we failed, the response is " + response)
+		fmt.Println("The error is " + err.Error())
+	} else {
+		fmt.Println("Successfully sent notification to topic the response is " + response)
+		fmt.Printf("response: %v\n", response)
+	}
+
 }
