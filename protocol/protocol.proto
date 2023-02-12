@@ -2,7 +2,7 @@ syntax = "proto3";
 
 
 import "protocol/register_request.proto";
-import "login_request.proto";
+import "protocol/login_request.proto";
 
 
 message AppRequest {

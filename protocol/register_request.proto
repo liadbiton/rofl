@@ -1,17 +1,5 @@
 syntax = "proto3";
-import "user_information.proto";
-
-message HomeAddress {
-    string textual = 1;
-    float latitude = 2;
-    float longitude = 3;
-}
-
-message Date {
-    uint32 day = 1;
-    uint32 month = 2;
-    uint32 year = 3;
-}
+import "protocol/user_information.proto";
 
 message VolunteerUniqueRegisterParameters {
     string email = 1;

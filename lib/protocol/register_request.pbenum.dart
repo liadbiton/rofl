@@ -26,3 +26,20 @@ class RegisterReturnCode extends $pb.ProtobufEnum {
   const RegisterReturnCode._($core.int v, $core.String n) : super(v, n);
 }
 
+class RegisterResponse_ReturnCode extends $pb.ProtobufEnum {
+  static const RegisterResponse_ReturnCode SUCCESS = RegisterResponse_ReturnCode._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'SUCCESS');
+  static const RegisterResponse_ReturnCode PHONE_TAKEN = RegisterResponse_ReturnCode._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'PHONE_TAKEN');
+  static const RegisterResponse_ReturnCode EMAIL_TAKEN = RegisterResponse_ReturnCode._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'EMAIL_TAKEN');
+
+  static const $core.List<RegisterResponse_ReturnCode> values = <RegisterResponse_ReturnCode> [
+    SUCCESS,
+    PHONE_TAKEN,
+    EMAIL_TAKEN,
+  ];
+
+  static final $core.Map<$core.int, RegisterResponse_ReturnCode> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static RegisterResponse_ReturnCode? valueOf($core.int value) => _byValue[value];
+
+  const RegisterResponse_ReturnCode._($core.int v, $core.String n) : super(v, n);
+}
+

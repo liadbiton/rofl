@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'protocol/register_request.pb.dart';
 import 'protocol/protocol.pb.dart';
+import 'protocol/login_request.pb.dart';
+import 'protocol/user_information.pb.dart';
+
+
+AppRequest rofl = AppRequest();
+RegisterRequest rofl2 = RegisterRequest();
 
 
 
 
 
 void main() {
-  runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

@@ -9,159 +9,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'user_information.pb.dart' as $0;
+
 import 'register_request.pbenum.dart';
 
 export 'register_request.pbenum.dart';
-
-class HomeAddress extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HomeAddress', createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textual')
-    ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'latitude', $pb.PbFieldType.OF)
-    ..a<$core.double>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'longitude', $pb.PbFieldType.OF)
-    ..hasRequiredFields = false
-  ;
-
-  HomeAddress._() : super();
-  factory HomeAddress({
-    $core.String? textual,
-    $core.double? latitude,
-    $core.double? longitude,
-  }) {
-    final _result = create();
-    if (textual != null) {
-      _result.textual = textual;
-    }
-    if (latitude != null) {
-      _result.latitude = latitude;
-    }
-    if (longitude != null) {
-      _result.longitude = longitude;
-    }
-    return _result;
-  }
-  factory HomeAddress.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory HomeAddress.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  HomeAddress clone() => HomeAddress()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  HomeAddress copyWith(void Function(HomeAddress) updates) => super.copyWith((message) => updates(message as HomeAddress)) as HomeAddress; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static HomeAddress create() => HomeAddress._();
-  HomeAddress createEmptyInstance() => create();
-  static $pb.PbList<HomeAddress> createRepeated() => $pb.PbList<HomeAddress>();
-  @$core.pragma('dart2js:noInline')
-  static HomeAddress getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HomeAddress>(create);
-  static HomeAddress? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get textual => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set textual($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasTextual() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTextual() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.double get latitude => $_getN(1);
-  @$pb.TagNumber(2)
-  set latitude($core.double v) { $_setFloat(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasLatitude() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLatitude() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.double get longitude => $_getN(2);
-  @$pb.TagNumber(3)
-  set longitude($core.double v) { $_setFloat(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasLongitude() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearLongitude() => clearField(3);
-}
-
-class Date extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Date', createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'day', $pb.PbFieldType.OU3)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'month', $pb.PbFieldType.OU3)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'year', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
-
-  Date._() : super();
-  factory Date({
-    $core.int? day,
-    $core.int? month,
-    $core.int? year,
-  }) {
-    final _result = create();
-    if (day != null) {
-      _result.day = day;
-    }
-    if (month != null) {
-      _result.month = month;
-    }
-    if (year != null) {
-      _result.year = year;
-    }
-    return _result;
-  }
-  factory Date.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Date.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Date clone() => Date()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Date copyWith(void Function(Date) updates) => super.copyWith((message) => updates(message as Date)) as Date; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Date create() => Date._();
-  Date createEmptyInstance() => create();
-  static $pb.PbList<Date> createRepeated() => $pb.PbList<Date>();
-  @$core.pragma('dart2js:noInline')
-  static Date getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Date>(create);
-  static Date? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get day => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set day($core.int v) { $_setUnsignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasDay() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearDay() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get month => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set month($core.int v) { $_setUnsignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasMonth() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMonth() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.int get year => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set year($core.int v) { $_setUnsignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasYear() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearYear() => clearField(3);
-}
 
 class VolunteerUniqueRegisterParameters extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'VolunteerUniqueRegisterParameters', createEmptyInstance: create)
@@ -210,18 +62,65 @@ class VolunteerUniqueRegisterParameters extends $pb.GeneratedMessage {
   void clearEmail() => clearField(1);
 }
 
+class RegisterRequest_VolunteerParameters extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RegisterRequest.VolunteerParameters', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  RegisterRequest_VolunteerParameters._() : super();
+  factory RegisterRequest_VolunteerParameters({
+    $core.String? email,
+  }) {
+    final _result = create();
+    if (email != null) {
+      _result.email = email;
+    }
+    return _result;
+  }
+  factory RegisterRequest_VolunteerParameters.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RegisterRequest_VolunteerParameters.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RegisterRequest_VolunteerParameters clone() => RegisterRequest_VolunteerParameters()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RegisterRequest_VolunteerParameters copyWith(void Function(RegisterRequest_VolunteerParameters) updates) => super.copyWith((message) => updates(message as RegisterRequest_VolunteerParameters)) as RegisterRequest_VolunteerParameters; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RegisterRequest_VolunteerParameters create() => RegisterRequest_VolunteerParameters._();
+  RegisterRequest_VolunteerParameters createEmptyInstance() => create();
+  static $pb.PbList<RegisterRequest_VolunteerParameters> createRepeated() => $pb.PbList<RegisterRequest_VolunteerParameters>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterRequest_VolunteerParameters getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterRequest_VolunteerParameters>(create);
+  static RegisterRequest_VolunteerParameters? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+}
+
 class RegisterRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RegisterRequest', createEmptyInstance: create)
     ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isVolunteer')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
-    ..aOM<HomeAddress>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: HomeAddress.create)
+    ..aOM<$0.HomeAddress>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $0.HomeAddress.create)
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phoneNumber')
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'idNumber')
-    ..aOM<Date>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'birthday', subBuilder: Date.create)
+    ..aOM<$0.Date>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'birthday', subBuilder: $0.Date.create)
     ..aOS(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fcmToken')
-    ..aOM<VolunteerUniqueRegisterParameters>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'volunteerParameters', subBuilder: VolunteerUniqueRegisterParameters.create)
+    ..aOM<RegisterRequest_VolunteerParameters>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'volunteerParameters', subBuilder: RegisterRequest_VolunteerParameters.create)
     ..hasRequiredFields = false
   ;
 
@@ -231,12 +130,12 @@ class RegisterRequest extends $pb.GeneratedMessage {
     $core.String? firstName,
     $core.String? lastName,
     $core.String? password,
-    HomeAddress? address,
+    $0.HomeAddress? address,
     $core.String? phoneNumber,
     $core.String? idNumber,
-    Date? birthday,
+    $0.Date? birthday,
     $core.String? fcmToken,
-    VolunteerUniqueRegisterParameters? volunteerParameters,
+    RegisterRequest_VolunteerParameters? volunteerParameters,
   }) {
     final _result = create();
     if (isVolunteer != null) {
@@ -329,15 +228,15 @@ class RegisterRequest extends $pb.GeneratedMessage {
   void clearPassword() => clearField(4);
 
   @$pb.TagNumber(5)
-  HomeAddress get address => $_getN(4);
+  $0.HomeAddress get address => $_getN(4);
   @$pb.TagNumber(5)
-  set address(HomeAddress v) { setField(5, v); }
+  set address($0.HomeAddress v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAddress() => $_has(4);
   @$pb.TagNumber(5)
   void clearAddress() => clearField(5);
   @$pb.TagNumber(5)
-  HomeAddress ensureAddress() => $_ensure(4);
+  $0.HomeAddress ensureAddress() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.String get phoneNumber => $_getSZ(5);
@@ -358,15 +257,15 @@ class RegisterRequest extends $pb.GeneratedMessage {
   void clearIdNumber() => clearField(7);
 
   @$pb.TagNumber(8)
-  Date get birthday => $_getN(7);
+  $0.Date get birthday => $_getN(7);
   @$pb.TagNumber(8)
-  set birthday(Date v) { setField(8, v); }
+  set birthday($0.Date v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasBirthday() => $_has(7);
   @$pb.TagNumber(8)
   void clearBirthday() => clearField(8);
   @$pb.TagNumber(8)
-  Date ensureBirthday() => $_ensure(7);
+  $0.Date ensureBirthday() => $_ensure(7);
 
   @$pb.TagNumber(9)
   $core.String get fcmToken => $_getSZ(8);
@@ -378,35 +277,82 @@ class RegisterRequest extends $pb.GeneratedMessage {
   void clearFcmToken() => clearField(9);
 
   @$pb.TagNumber(10)
-  VolunteerUniqueRegisterParameters get volunteerParameters => $_getN(9);
+  RegisterRequest_VolunteerParameters get volunteerParameters => $_getN(9);
   @$pb.TagNumber(10)
-  set volunteerParameters(VolunteerUniqueRegisterParameters v) { setField(10, v); }
+  set volunteerParameters(RegisterRequest_VolunteerParameters v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasVolunteerParameters() => $_has(9);
   @$pb.TagNumber(10)
   void clearVolunteerParameters() => clearField(10);
   @$pb.TagNumber(10)
-  VolunteerUniqueRegisterParameters ensureVolunteerParameters() => $_ensure(9);
+  RegisterRequest_VolunteerParameters ensureVolunteerParameters() => $_ensure(9);
+}
+
+class RegisterResponse_ResponseData extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RegisterResponse.ResponseData', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sessionToken')
+    ..hasRequiredFields = false
+  ;
+
+  RegisterResponse_ResponseData._() : super();
+  factory RegisterResponse_ResponseData({
+    $core.String? sessionToken,
+  }) {
+    final _result = create();
+    if (sessionToken != null) {
+      _result.sessionToken = sessionToken;
+    }
+    return _result;
+  }
+  factory RegisterResponse_ResponseData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RegisterResponse_ResponseData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RegisterResponse_ResponseData clone() => RegisterResponse_ResponseData()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RegisterResponse_ResponseData copyWith(void Function(RegisterResponse_ResponseData) updates) => super.copyWith((message) => updates(message as RegisterResponse_ResponseData)) as RegisterResponse_ResponseData; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RegisterResponse_ResponseData create() => RegisterResponse_ResponseData._();
+  RegisterResponse_ResponseData createEmptyInstance() => create();
+  static $pb.PbList<RegisterResponse_ResponseData> createRepeated() => $pb.PbList<RegisterResponse_ResponseData>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterResponse_ResponseData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterResponse_ResponseData>(create);
+  static RegisterResponse_ResponseData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionToken => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionToken($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionToken() => clearField(1);
 }
 
 class RegisterResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RegisterResponse', createEmptyInstance: create)
-    ..e<RegisterReturnCode>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'returnCode', $pb.PbFieldType.OE, defaultOrMaker: RegisterReturnCode.REGISTER_SUCCESS, valueOf: RegisterReturnCode.valueOf, enumValues: RegisterReturnCode.values)
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sessionToken')
+    ..e<RegisterResponse_ReturnCode>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'returnCode', $pb.PbFieldType.OE, defaultOrMaker: RegisterResponse_ReturnCode.SUCCESS, valueOf: RegisterResponse_ReturnCode.valueOf, enumValues: RegisterResponse_ReturnCode.values)
+    ..aOM<RegisterResponse_ResponseData>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseData', subBuilder: RegisterResponse_ResponseData.create)
     ..hasRequiredFields = false
   ;
 
   RegisterResponse._() : super();
   factory RegisterResponse({
-    RegisterReturnCode? returnCode,
-    $core.String? sessionToken,
+    RegisterResponse_ReturnCode? returnCode,
+    RegisterResponse_ResponseData? responseData,
   }) {
     final _result = create();
     if (returnCode != null) {
       _result.returnCode = returnCode;
     }
-    if (sessionToken != null) {
-      _result.sessionToken = sessionToken;
+    if (responseData != null) {
+      _result.responseData = responseData;
     }
     return _result;
   }
@@ -432,21 +378,23 @@ class RegisterResponse extends $pb.GeneratedMessage {
   static RegisterResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  RegisterReturnCode get returnCode => $_getN(0);
+  RegisterResponse_ReturnCode get returnCode => $_getN(0);
   @$pb.TagNumber(1)
-  set returnCode(RegisterReturnCode v) { setField(1, v); }
+  set returnCode(RegisterResponse_ReturnCode v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReturnCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearReturnCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get sessionToken => $_getSZ(1);
+  RegisterResponse_ResponseData get responseData => $_getN(1);
   @$pb.TagNumber(2)
-  set sessionToken($core.String v) { $_setString(1, v); }
+  set responseData(RegisterResponse_ResponseData v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasSessionToken() => $_has(1);
+  $core.bool hasResponseData() => $_has(1);
   @$pb.TagNumber(2)
-  void clearSessionToken() => clearField(2);
+  void clearResponseData() => clearField(2);
+  @$pb.TagNumber(2)
+  RegisterResponse_ResponseData ensureResponseData() => $_ensure(1);
 }
 
