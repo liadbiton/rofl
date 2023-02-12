@@ -1,6 +1,5 @@
 syntax = "proto3";
-
-<<<<<<< HEAD
+import "user_information.proto";
 
 message HomeAddress {
     string textual = 1;
@@ -23,9 +22,6 @@ enum RegisterReturnCode {
     REGISTER_PHONE_TAKEN = 1;
     REGISTER_EMAIL_TAKEN = 2;
 }
-=======
-import "user_information.proto";
->>>>>>> origin/protocol
 
 message RegisterRequest {
     bool is_volunteer = 1;

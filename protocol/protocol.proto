@@ -1,11 +1,9 @@
 syntax = "proto3";
 
-<<<<<<< HEAD
+
 import "protocol/register_request.proto";
-=======
-import "register_request.proto";
 import "login_request.proto";
->>>>>>> origin/protocol
+
 
 message AppRequest {
     uint32 version = 1;
