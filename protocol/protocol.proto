@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "register_request.proto";
+import "protocol/register_request.proto";
 
 message AppRequest {
     oneof request {
