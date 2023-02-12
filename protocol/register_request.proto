@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+<<<<<<< HEAD
 
 message HomeAddress {
     string textual = 1;
@@ -22,6 +23,9 @@ enum RegisterReturnCode {
     REGISTER_PHONE_TAKEN = 1;
     REGISTER_EMAIL_TAKEN = 2;
 }
+=======
+import "user_information.proto";
+>>>>>>> origin/protocol
 
 message RegisterRequest {
     bool is_volunteer = 1;
@@ -33,10 +37,22 @@ message RegisterRequest {
     string id_number = 7;
     Date birthday = 8;
     optional string fcm_token = 9;
-    optional VolunteerUniqueRegisterParameters volunteer_parameters = 10;
+    message VolunteerParameters {
+        string email = 1;
+    }
+    optional VolunteerParameters volunteer_parameters = 10;
 }
 
 message RegisterResponse {
-    RegisterReturnCode return_code = 1;
-    optional string session_token = 2;
+    enum ReturnCode {
+        SUCCESS = 0;
+        PHONE_TAKEN = 1;
+        EMAIL_TAKEN = 2;
+    }
+    ReturnCode return_code = 1;
+
+    message ResponseData {
+        string session_token = 1;
+    }
+    optional ResponseData response_data = 2;
 }
