@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "protocol/protobuf";
 
 message LoginRequest {
     oneof user_identifier {

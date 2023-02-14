@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "protocol/protobuf";
 
 import "register_request.proto";
 import "login_request.proto";

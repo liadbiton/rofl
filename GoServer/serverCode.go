@@ -1,15 +1,18 @@
 package main
 
 import (
+	"GoServer/protocol/protobuf"
+	"bytes"
+	"encoding/binary"
 	"fmt"
+	"github.com/golang/protobuf/proto"
+	_ "github.com/lib/pq"
 	"net"
 	"os"
-
-	_ "github.com/lib/pq"
 )
 
 const (
-	SERVERHOST = "127.0.0.1"
+	SERVERHOST = "10.100.102.37"
 	SERVERPORT = "9988"
 	SERVERTYPE = "tcp"
 )
@@ -48,17 +51,62 @@ from the client.
 */
 func clientConnected(connection net.Conn) {
 	for {
-		massage := newMassage(connection)
-
-		handleMassage(massage)
+		err, newRequest := getRequest(connection)
+		if err {
+			fmt.Println("Client Disconnected")
+			return
+		}
+		sendResponse(connection, newRequest)
 	}
 }
 
-/*
-this func handle the massage content
-the func switch case depend on the
-OPCode it got from the user
-*/
-func handleMassage(mas *massage) {
+func getRequest(connection net.Conn) (bool, protobuf.AppRequest) {
+	newRequest := &protobuf.AppRequest{}
+	err := false
+	sizeOfBuffer := make([]byte, 4)
+	_, reErr := connection.Read(sizeOfBuffer)
+	if reErr != nil {
+		fmt.Println("Reading Size From Server Error")
+		connection.Close()
+		err = true
+		return err, *newRequest
+	}
+	fmt.Println(sizeOfBuffer)
+	buffer := make([]byte, binary.BigEndian.Uint32(sizeOfBuffer))
+	_, reErr = connection.Read(buffer)
+	if reErr != nil {
+		fmt.Println("Reading From Server Error")
+	}
+	fmt.Println(buffer)
+	unErr := proto.Unmarshal(buffer, newRequest)
+	if unErr != nil {
+		fmt.Println("Unmarshal Error")
+	}
+	return err, *newRequest
+}
 
+func sendResponse(conn net.Conn, req protobuf.AppRequest) {
+	newResponse := generateResponse(req)
+	buffer, mErr := proto.Marshal(&newResponse)
+	if mErr != nil {
+		fmt.Println("Marshal Error")
+	}
+	fmt.Println(buffer)
+	sizeInByte := new(bytes.Buffer)
+	sizeOfBuffer := int32(len(buffer))
+	err := binary.Write(sizeInByte, binary.BigEndian, sizeOfBuffer)
+	if err != nil {
+		fmt.Println("Error Converting")
+	}
+	conn.Write(sizeInByte.Bytes())
+	conn.Write(buffer)
+}
+
+func generateResponse(req protobuf.AppRequest) protobuf.AppResponse {
+	response := &protobuf.AppResponse{
+		RequestId: req.RequestId + 150,
+	}
+	fmt.Println(response)
+	//switch req.RequestId
+	return *response
 }
