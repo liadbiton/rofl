@@ -8,23 +8,25 @@ import 'protocol/login_request.pb.dart';
 import 'protocol/user_information.pb.dart';
 import 'dart:io';
 
-int LENGTH_HEADER = 4;
+final LENGTH_HEADER = 4;
 
 main()
 async {
   //Checks for the client.
   var rofl4 = 2;
-  TcpClient client = TcpClient(host: "10.0.2.2", port: 9988);
+  TcpClient client = TcpClient(host: "10.100.102.37", port: 9988);
   await client.connectHost();
   AppRequest rofl = AppRequest();
   rofl.version = 1;
   rofl.sessionToken = 2;
   rofl.requestId = 18;
   client.sendMessage(rofl);
-  client.disconnect();
+  var dab = await client.receiveAppResponse();
+  print(dab.requestId);
 }
 class TcpClient {
-  Socket? _socket;
+  RawSocket? _socket;
+  Stream<Uint8List>? _socketStream;
   String host = "";
   int port = 0;
   TcpClient({required this.host, required this.port});
@@ -32,7 +34,7 @@ class TcpClient {
   //simple connect to a socket, catches error.
   Future<void> connectHost() async {
     try {
-      _socket = await Socket.connect(host, port);
+      _socket = (await RawSocket.connect(host, port));
       print('Connected to the server');
     } catch (e) {
       print('Failed to connect to the server due to: $e');
@@ -62,10 +64,10 @@ class TcpClient {
     try {
       if (_socket != null) {
         var lengthBuffer = getAppRequestLength(message);
-        _socket?.add(lengthBuffer); //sends the length to the server
+        _socket?.write(lengthBuffer); //sends the length to the server
         print('Length sent');
         print(message.writeToBuffer());
-        _socket?.add(message.writeToBuffer());//send the request to the server
+        _socket?.write(message.writeToBuffer());//send the request to the server
         print('Message sent');
         return 1;
       } else {
@@ -88,44 +90,33 @@ class TcpClient {
   Return an Int that represents the length.
    */
   Future<int> receiveLength() async {
-    if(_socket != null)
-      {
-        final length = await _socket //read the required bytes for the length
-            ?.asBroadcastStream()
-            .firstWhere((data) => data.length >= LENGTH_HEADER, orElse: () => Uint8List(0));
-        if(length?.length == 0)
-        {
-          print('Error: Failed to read message length prefix');
-          return Future.error('Error');
-        }
-        final messageLength = ByteData.sublistView(length!).getInt32(0);
-        return messageLength;
-      }
-    else
-      {
+    if (_socket != null) {
+      // If the socket stream has not been stored yet, store it now.
+      var length = _socket?.read(LENGTH_HEADER);
+      if (length?.length == 0) {
+        print('Error: Failed to read message length prefix');
         return Future.error('Error');
       }
+      print(length);
+      final messageLength = ByteData.sublistView(length!).getInt32(0);
+      return messageLength;
+    } else {
+      return Future.error('Error');
+    }
   }
 
-  /*
-  This function receives the data from the server, in a byte array.
-   */
-  Future<Uint8List?> receiveData(int length) async{
-    if (_socket != null)
-      {
-        final messageBytes = await _socket
-            ?.asBroadcastStream()
-            .firstWhere((data) => data.length >= length, orElse: () => Uint8List(0));
-        if (messageBytes?.length == 0) {
-          print('Error: Failed to read message');
-          return Future.error('Error');
-        }
-        return messageBytes;
-      }
-    else
-      {
+  Future<Uint8List?> receiveData(int length) async {
+    if (_socket != null) {
+      // If the socket stream has not been stored yet, store it now.
+      var messageBytes = _socket?.read(length);
+      if (messageBytes?.length == 0) {
+        print('Error: Failed to read message');
         return Future.error('Error');
       }
+      return messageBytes;
+    } else {
+      return Future.error('Error');
+    }
   }
 
   /*
