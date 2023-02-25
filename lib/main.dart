@@ -20,13 +20,14 @@ async {
   rofl.version = 1;
   rofl.sessionToken = 2;
   rofl.requestId = 18;
-  client.sendMessage(rofl);
+  client.sendAppRequest(rofl);
   var dab = await client.receiveAppResponse();
   print(dab.requestId);
 }
 class TcpClient {
   RawSocket? _socket;
-  Stream<Uint8List>? _socketStream;
+  Socket? _socketStream;
+
   String host = "";
   int port = 0;
   TcpClient({required this.host, required this.port});
@@ -35,6 +36,7 @@ class TcpClient {
   Future<void> connectHost() async {
     try {
       _socket = (await RawSocket.connect(host, port));
+      _socketStream = (await Socket.connect(host, port));
       print('Connected to the server');
     } catch (e) {
       print('Failed to connect to the server due to: $e');
@@ -60,7 +62,7 @@ class TcpClient {
   Followed by the data from the request.
   Returns 1 if succesfull, error otherwise.
    */
-  Future<int> sendMessage(AppRequest message) async {
+  Future<int> sendAppRequest(AppRequest message) async {
     try {
       if (_socket != null) {
         var lengthBuffer = getAppRequestLength(message);
@@ -161,3 +163,57 @@ class TcpClient {
     }
   }
 }
+
+AppRequest createAppRequest(Uint32 version,Uint32 session_token ,Uint32 request_id)
+{
+  AppRequest newAppRequest = AppRequest();
+  newAppRequest.version = version as int;
+  newAppRequest.sessionToken = session_token as int;
+  newAppRequest.requestId = request_id as int;
+  return newAppRequest;
+}
+
+AppRequest createRegisterRequest(
+    int version,int session_token ,int request_id,
+    bool is_volunteer, String first_name, String last_name,
+    String password, String home_address, double latitude,
+    double longitude, String phone_number, String id_number,
+    int day, int month, int year,
+    [String fcm_token="", String email=""])
+{
+  HomeAddress newHomeAddress = HomeAddress(textual: home_address, latitude: latitude, longitude: longitude);
+  Date newDate = Date(day: day, month: month, year: year);
+  RegisterRequest newRegisterRequest = RegisterRequest(
+    isVolunteer: is_volunteer,
+    firstName: first_name,
+    lastName: last_name,
+    password: password,
+    address: newHomeAddress,
+    phoneNumber: phone_number,
+    idNumber: id_number,
+    birthday: newDate,
+    fcmToken: fcm_token,
+  );
+
+  AppRequest newAppRequest = AppRequest(version: version, sessionToken: session_token, requestId: request_id, registerRequest: newRegisterRequest);
+
+  return newAppRequest;
+}
+
+AppRequest createLoginRequest(int version,int request_id, String password, {String phone_number= "", String email = ""})
+{
+  LoginRequest newLoginRequest = LoginRequest(password: password);
+  if(phone_number != "")
+    {
+      newLoginRequest.phoneNumber = phone_number;
+    }
+  else{
+    newLoginRequest.email = email;
+  }
+
+  AppRequest newAppRequest = AppRequest(version: version, requestId: request_id, logicRequest: newLoginRequest);
+
+  return newAppRequest;
+}
+
+
