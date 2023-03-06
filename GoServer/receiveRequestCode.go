@@ -8,6 +8,10 @@ import (
 	"net"
 )
 
+/*
+receiveRequest reads the message from the buffer by the protocol
+then transfer the data into AppRequest struct for easy manipulation
+*/
 func receiveRequest(connection net.Conn) (bool, protobuf.AppRequest) {
 	newRequest := &protobuf.AppRequest{}
 	err := false

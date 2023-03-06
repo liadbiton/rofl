@@ -9,6 +9,10 @@ import (
 	"net"
 )
 
+/*
+sendResponse take the AppResponse struct and extract the data into bytes
+then send the message aka the response back to the client
+*/
 func sendResponse(conn net.Conn, resp protobuf.AppResponse) {
 
 	//marshal transfer the info from the struct into a byte array
