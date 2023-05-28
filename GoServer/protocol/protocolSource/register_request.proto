@@ -1,7 +1,19 @@
 syntax = "proto3";
+<<<<<<< HEAD:GoServer/protocol/protocolSource/register_request.proto
 option go_package = "protocol/protobuf";
+=======
+import "protocol/protocolSource/user_information.proto";
+>>>>>>> origin/protocol:protocol/register_request.proto
 
-import "user_information.proto";
+message VolunteerUniqueRegisterParameters {
+    string email = 1;
+}
+
+enum RegisterReturnCode {
+    REGISTER_SUCCESS = 0;
+    REGISTER_PHONE_TAKEN = 1;
+    REGISTER_EMAIL_TAKEN = 2;
+}
 
 message RegisterRequest {
     bool is_volunteer = 1;

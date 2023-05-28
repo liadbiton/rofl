@@ -1,8 +1,10 @@
 syntax = "proto3";
 option go_package = "protocol/protobuf";
 
-import "register_request.proto";
-import "login_request.proto";
+
+import "protocol/register_request.proto";
+import "protocol/login_request.proto";
+
 
 message AppRequest {
     uint32 version = 1;
