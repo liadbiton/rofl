@@ -1,6 +1,15 @@
 syntax = "proto3";
+import "protocol/user_information.proto";
 
-import "user_information.proto";
+message VolunteerUniqueRegisterParameters {
+    string email = 1;
+}
+
+enum RegisterReturnCode {
+    REGISTER_SUCCESS = 0;
+    REGISTER_PHONE_TAKEN = 1;
+    REGISTER_EMAIL_TAKEN = 2;
+}
 
 message RegisterRequest {
     bool is_volunteer = 1;
