@@ -1,0 +1,46 @@
+syntax = "proto3";
+<<<<<<< HEAD:GoServer/protocol/protocolSource/register_request.proto
+option go_package = "protocol/protobuf";
+=======
+import "protocol/protocolSource/user_information.proto";
+>>>>>>> origin/protocol:protocol/register_request.proto
+
+message VolunteerUniqueRegisterParameters {
+    string email = 1;
+}
+
+enum RegisterReturnCode {
+    REGISTER_SUCCESS = 0;
+    REGISTER_PHONE_TAKEN = 1;
+    REGISTER_EMAIL_TAKEN = 2;
+}
+
+message RegisterRequest {
+    bool is_volunteer = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string password = 4;
+    HomeAddress address = 5;
+    string phone_number = 6;
+    string id_number = 7;
+    Date birthday = 8;
+    optional string fcm_token = 9;
+    message VolunteerParameters {
+        string email = 1;
+    }
+    optional VolunteerParameters volunteer_parameters = 10;
+}
+
+message RegisterResponse {
+    enum ReturnCode {
+        SUCCESS = 0;
+        PHONE_TAKEN = 1;
+        EMAIL_TAKEN = 2;
+    }
+    ReturnCode return_code = 1;
+
+    message ResponseData {
+        string session_token = 1;
+    }
+    optional ResponseData response_data = 2;
+}
